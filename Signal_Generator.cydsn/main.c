@@ -11,7 +11,7 @@
 #define ERR_MSG ": invalid input_str. Type 'help' to see available input_strs\r\n"
 #define CMD_LEN 4
 #define OPTION_LEN 4
-#define NUM_LEN 10
+#define NUM_LEN 6
 
 const char help_message[] = 
     "\r\nHi! This is a PC controlled signal generator.\r\n"
@@ -19,6 +19,7 @@ const char help_message[] =
     "  'help' to see this help message.\r\n"
     "  'led' to control the LED.\r\n"
     "  'pwm' to control PWMs.\r\n"
+    "  'clk' to control the Clock for the PWMs.\r\n"
     ;
 
 void extract_first_word(char * input_str, char * first_word, const uint word_len){
@@ -71,6 +72,7 @@ void execute_input_str(char * input_str){
         "property:\r\n"
         "  p: period\r\n"
         "  c: compare\r\n"
+        "  r: control register\r\n"
         ;
         char pwm_id = input_str[4];
         char option[OPTION_LEN] = "";
@@ -158,7 +160,39 @@ void execute_input_str(char * input_str){
         else if(strcmp(option, "off")==0) LED_Write(0u);
         else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
         }
+    
+    /* clk */
+    else if(strcmp(cmd, "clk")==0){
+        const char cmd_format[] =  
+        "clk format: clk <option> [property] [number]\r\n"
+        "option:\r\n"
+        "  set\r\n"
+        "  get\r\n"
+        "property:\r\n"
+        "  d: divider\r\n"
+        ;
+        char option[OPTION_LEN] = "";
+        extract_first_word(input_str+4, option, OPTION_LEN);
+        char property = input_str[8];
+        char number_str[NUM_LEN] = "";
+        extract_first_word(input_str+10, number_str, NUM_LEN);
+        uint number = 0;
+        sscanf(number_str, "%u", &number);
+        
+        if(strcmp(option, "get")==0){
+            if(property=='d') send_uint(Clock_1_GetDividerRegister());
+            else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
+        }
+        else if(strcmp(option, "set")==0){
+            if(property=='d'){
+                Clock_1_SetDividerRegister(number, 1u);
+                send_uint(Clock_1_GetDividerRegister());
+            }
+            else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
+        }
+        else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
 
+    }
     /* no match */
     else send_error_msg(input_str);
 }
