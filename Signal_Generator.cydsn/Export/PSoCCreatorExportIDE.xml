@@ -118,10 +118,17 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_1_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Clock_1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Clock_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_1_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_1_Out.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_1_Out.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_1_Out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_1_Out_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2_out.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2_out.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2_out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\PWM_2_out_PM.c</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\angad\PSoC Projects\Signal_Generator\Signal_Generator.cydsn\Export\ARM_GCC_Generic">
