@@ -72,7 +72,6 @@ void execute_input_str(char * input_str){
         "property:\r\n"
         "  p: period\r\n"
         "  c: compare\r\n"
-        "  r: control register\r\n"
         ;
         char pwm_id = input_str[4];
         char option[OPTION_LEN] = "";
@@ -86,8 +85,7 @@ void execute_input_str(char * input_str){
         switch(pwm_id){
             case '1':
                 if(strcmp(option, "on")==0){
-                    uint enabled = PWM_1_ReadControlRegister()>>7 && 0x01;  // mask Enable bit
-                    if(enabled); else if(PWM_1_initVar) PWM_1_Wakeup(); else PWM_1_Start();
+                    if(PWM_1_ReadStatus()==PWM_1_STATUS_RUNNING); else if(PWM_1_initVar) PWM_1_Wakeup(); else PWM_1_Start();
                 }
                 else if(strcmp(option, "off")==0){
                     PWM_1_Sleep();
@@ -95,7 +93,6 @@ void execute_input_str(char * input_str){
                 else if(strcmp(option, "get")==0){
                     if(property=='p') send_uint(PWM_1_ReadPeriod());
                     else if(property=='c') send_uint(PWM_1_ReadCompare());
-                    else if(property=='r') send_uint(PWM_1_ReadControlRegister());
                     else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
                 }
                 else if(strcmp(option, "set")==0){
@@ -113,8 +110,7 @@ void execute_input_str(char * input_str){
                 break;
             case '2':
                 if(strcmp(option, "on")==0){
-                    uint enabled = PWM_2_ReadControlRegister()>>7 && 0x01;  // mask Enable bit
-                    if(enabled); else if(PWM_2_initVar) PWM_2_Wakeup(); else PWM_2_Start();
+                    if(PWM_2_ReadStatus()==PWM_2_STATUS_RUNNING); else if(PWM_2_initVar) PWM_2_Wakeup(); else PWM_2_Start();
                 }
                 else if(strcmp(option, "off")==0){
                     PWM_2_Sleep();
@@ -122,7 +118,6 @@ void execute_input_str(char * input_str){
                 else if(strcmp(option, "get")==0){
                     if(property=='p') send_uint(PWM_2_ReadPeriod());
                     else if(property=='c') send_uint(PWM_2_ReadCompare());
-                    else if(property=='r') send_uint(PWM_2_ReadControlRegister());
                     else UART_SpiUartPutArray(cmd_format, strlen(cmd_format));
                 }
                 else if(strcmp(option, "set")==0){
