@@ -13,11 +13,11 @@ The MiniProg isn't necessary as the PSoC device can be programmed using the boot
 A serial communication terminal application is needed to interact with the Signal Generator. I prefer to use Python's PySerial package which comes with an excellent `miniterm` program. It can be installed using `pip` as follows:  
 ```pip install pyserial```  
 And connected to the Signal Generator using the following command:  
-```python -m serial.tools.miniterm COM4 115200 -e```  
-  - `COM4` is the port for the PSoC 4 Prototyping kit on my Windows computer  
-  - `115200` is the baud rate  
+On Windows: ```python -m serial.tools.miniterm COM4 115200 -e```  
+On Mac: ```python -m serial.tools.miniterm /dev/cu.usbmodem14231 115200 -e```  
+  - `COM4` is the port for the PSoC 4 Prototyping kit on my Windows computer and `/dev/cu.usbmodem1431` is the port on my Mac. Use this command to see all available ports: `python -m serial.tools.list_ports`  
+  - `115200` is the baud rate. 
   - `-e` enables the echo mode in `minitterm`  
-
 
 ## Commands  
 The code has the following three commands built into it, type them in the terminal and hit Enter to see usage formats:
